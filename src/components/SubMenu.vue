@@ -7,7 +7,11 @@
       </template>
       <sub-menu :menuList="menu.children" />
     </el-sub-menu>
-    <el-menu-item v-else-if="!menu.isHide" :index="menu.path" :route="menu.router">
+    <el-menu-item
+      v-else-if="!menu.isHide"
+      :index="menu.path"
+      :route="menu.router"
+    >
       <template #title>
         <i v-if="menu.icon" :class="menu.icon" />
         {{ menu.name }}
@@ -16,13 +20,15 @@
   </div>
 </template>
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { defineProps } from "vue";
 
 interface MenuFace {
   path: string;
   name: string;
   icon?: string;
-  children?: object[];
+  isHide?: boolean;
+  router: object,
+  children?: [];
 }
-const { menuList } = defineProps<{ menuList: MenuFace }>();
+const { menuList } = defineProps<{ menuList: [MenuFace] }>();
 </script>
