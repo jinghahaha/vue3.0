@@ -1,15 +1,16 @@
-import { postLogin } from '../../server/common';
+import { postLogin, getAuthMenu } from '../../server/common';
 
 type userInfo = { userName: string; userId: number; realName: string };
 
 export type commonState = {
   token: string;
   userInfo: userInfo;
-  routeList: object[];
+  routeList: string[];
 };
 
 const SET_TOKEN = 'SET_TOKEN';
 const SET_USER_INFO = 'SET_USER_INFO';
+const SET_ROUTE_LIST = 'SET_ROUTE_LIST';
 
 const state: commonState = {
   token: '',
@@ -32,6 +33,16 @@ const actions = {
         sessionStorage.setItem('userInfo', JSON.stringify({ userName, userId, realName }));
         commit(SET_TOKEN, token);
         commit(SET_USER_INFO, { userName, userId, realName });
+        resolve(res);
+      }
+      reject(res);
+    });
+  },
+  getRouteList({ commit }: any) {
+    return new Promise(async (resolve, reject) => {
+      const res = await getAuthMenu();
+      if (res.code === '200') {
+        commit(SET_ROUTE_LIST, Object.keys(res.data));
         resolve(res);
       }
       reject(res);

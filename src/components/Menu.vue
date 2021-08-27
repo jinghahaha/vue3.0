@@ -1,6 +1,6 @@
 <template>
   <el-aside width="200px">
-    <div class="side-title">反侦测作业平台</div>
+    <div class="side-title">Vue3.0</div>
     <el-menu
       background-color="#062c82"
       text-color="rgba(255, 255, 255, 0.7)"
