@@ -18,8 +18,13 @@ const router = createRouter({
 /**
  * 路由守卫
  */
-router.beforeEach((guard) => {
-  console.log(guard);
+router.beforeEach((to, from, next) => {
+  const {
+    meta: { isRequiredAuth },
+  } = to;
+  const token = sessionStorage.token;
+  if (isRequiredAuth && !token) next({ name: 'Login' });
+  else next();
 });
 
 /**

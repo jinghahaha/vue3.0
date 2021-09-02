@@ -7,6 +7,7 @@ export const routes = [
   },
   {
     path: '/login',
+    name: 'Login',
     component: () => import('../components/Login.vue'),
     meta: {
       isRequiredAuth: false,
